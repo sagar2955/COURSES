@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-const LearnerSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true
@@ -18,10 +18,10 @@ const LearnerSchema = new mongoose.Schema({
 
 
 // Encrypt the password
-LearnerSchema.pre('save', function (next){
+UserSchema.pre('save', function (next){
     const saltRounds = 10
     this.password = bcrypt.hashSync(this.password, saltRounds)
     next()
 })
 
-module.exports = mongoose.model("learner",LearnerSchema)
+module.exports = mongoose.model("user",UserSchema)
